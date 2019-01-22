@@ -1,9 +1,9 @@
-package simulation
+package simulation.recorded
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-class HappyPath extends Simulation {
+class TariffClassificationsHappyPath extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("http://localhost:9581")
@@ -36,7 +36,7 @@ class HappyPath extends Simulation {
     val uri1 = "http://http.00.h.sophosxl.net/V3/01"
     val uri2 = "localhost"
 
-	val scn = scenario("HappyPath")
+	val scn = scenario("TariffClassification HappyPath")
 		.exec(http("request_0")
 			.get(uri1 + "/phfpbpuebzrrkgrafvba-cn.tbbtyrncvf.pbz.w/")
 			.headers(headers_0)
