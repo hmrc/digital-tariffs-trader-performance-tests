@@ -9,7 +9,7 @@ class BindingTariffApplicationHappyPath extends Simulation {
 		.baseURL("http://localhost:9582")
 		.inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png""", """.*\.map"""), WhiteList())
 		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
-		.userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+		.userAgentHeader("DigitalTariffs-PerformanceTests")
 
 	val waitTime = 5
 	private val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)""""
