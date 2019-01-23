@@ -3,7 +3,7 @@ package simulation.recorded
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-class TariffClassificationsHappyPath extends Simulation {
+class TariffClassificationHappyPath extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("http://localhost:9581")

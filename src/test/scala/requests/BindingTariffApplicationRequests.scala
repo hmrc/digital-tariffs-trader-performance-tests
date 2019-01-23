@@ -6,9 +6,13 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 
 object BindingTariffApplicationRequests extends BaseRequest {
 
-  // TODO: add baseUrl that works for any environemnt
-
+  // TODO: add baseUrl that works for any environment (local + MDTP)
   // TODO: add `pause` actions
+  // TODO: add `User-Agent`
+
+  def login = {
+    ???
+  }
 
   def start: HttpRequestBuilder = {
     http("Navigate to the landing page")
@@ -21,7 +25,5 @@ object BindingTariffApplicationRequests extends BaseRequest {
       .get("/binding-tariff-application")
       .check(status.is(200))
   }
-
-
 
 }
