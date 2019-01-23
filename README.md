@@ -1,4 +1,4 @@
 
 # digital-tariffs-performance-tests
 
-This is a placeholder README.md for a new repository
+Gatling performance tests for the Digital Tariffs microservices
