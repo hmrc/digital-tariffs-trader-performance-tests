@@ -6,7 +6,6 @@ import io.gatling.http.Predef._
 class BindingTariffApplicationHappyPath extends Simulation {
 
 	private val baseUrl = "https://www.staging.tax.service.gov.uk"
-	//	private val baseUrl = "http://localhost:9582"
 
 	val httpProtocol = http
 		.baseURL(baseUrl)
@@ -32,13 +31,13 @@ class BindingTariffApplicationHappyPath extends Simulation {
 	val headers_3 = Map(
 		"Accept-Encoding" -> "gzip, deflate, br",
 		"Accept-Language" -> "en-GB,en-US;q=0.9,en;q=0.8",
-		"Origin" -> "http://localhost:9949",
+		"Origin" -> baseUrl,
 		"Upgrade-Insecure-Requests" -> "1")
 
 	val headers_5 = Map(
 		"Accept-Encoding" -> "gzip, deflate, br",
 		"Accept-Language" -> "en-GB,en-US;q=0.9,en;q=0.8",
-		"Origin" -> "http://localhost:9582",
+		"Origin" -> baseUrl,
 		"Upgrade-Insecure-Requests" -> "1")
 
 	val headers_16 = Map(
@@ -46,10 +45,8 @@ class BindingTariffApplicationHappyPath extends Simulation {
 		"Accept-Encoding" -> "gzip, deflate, br",
 		"Accept-Language" -> "en-GB,en-US;q=0.9,en;q=0.8",
 		"Content-Type" -> "multipart/form-data; boundary=----WebKitFormBoundaryt974rnChkrqCazYq",
-		"Origin" -> "http://localhost:9582",
+		"Origin" -> baseUrl,
 		"X-Requested-With" -> "XMLHttpRequest")
-
-	val uri2 = "localhost"
 
 	val scn = scenario("HappyPath")
 		.exec(http("Landing_Page")
@@ -63,7 +60,7 @@ class BindingTariffApplicationHappyPath extends Simulation {
 		.pause(waitTime)
 		// AuthWizard
 		.exec(http("Auth_Wizard")
-		.post("http://" + uri2 + ":9949/auth-login-stub/gg-sign-in")
+		.post(baseUrl + "/auth-login-stub/gg-sign-in")
 		.headers(headers_3)
 		.formParam("csrfToken", "you-do-not-need-this-anymore")
 		.formParam("authorityId", "")
@@ -297,7 +294,7 @@ class BindingTariffApplicationHappyPath extends Simulation {
 		.formParam("value", "This is supporting information.")
 		.check(saveCsrfToken()))
 		.pause(waitTime)
-		// CheckAnmswers
+		// CheckAnswers
 		.exec(http("Submit_Answers")
 		.post("/binding-tariff-application/check-your-answers")
 		.headers(headers_5)
