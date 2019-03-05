@@ -1,6 +1,7 @@
 package uk.gov.hmrc.perftests.digitaltariffs.operatorui
 
 import io.gatling.core.Predef._
+import io.gatling.http.Predef.flushCookieJar
 import io.gatling.http.protocol.HttpProtocolBuilder
 import uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiRequests._
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
@@ -10,11 +11,12 @@ import uk.gov.hmrc.perftests.digitaltariffs.operatorui.StrideAuthRequests._
 class OperatorUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
 
   override val httpProtocol: HttpProtocolBuilder = {
-    buildHttpProtocol(baseUrl = "https://admin.staging.tax.service.gov.uk")
+    buildHttpProtocol(url = "https://admin.staging.tax.service.gov.uk")
   }
 
   private val scn =
     scenario("HMRC Operator review a BTI application")
+      .exec(flushCookieJar)
       // Stride Auth Sign In
       .exec(getProtectedPageNoSession).exec(pause(waitTime))
       .exec(getStrideSignIn).exec(pause(waitTime))

@@ -5,8 +5,8 @@ import io.gatling.http.Predef._
 
 object StrideAuthRequests {
 
-  private val baseAdminUrl = "https://admin.staging.tax.service.gov.uk"
-  private val baseOperatorUiUrl = s"$baseAdminUrl/tariff-classification"
+  private val adminBaseUrl = "https://admin.staging.tax.service.gov.uk"
+  private val operatorUiBaseUrl = s"$adminBaseUrl/tariff-classification"
 
   private val relayStatePattern = """<input type="hidden" id="RelayState" name="RelayState" value="([^"]+)""""
   private val samlResponsePattern = """<input type="hidden" name="SAMLResponse" value="([^"]+)""""
@@ -16,7 +16,7 @@ object StrideAuthRequests {
 
   val getProtectedPageNoSession =
     http("Stride Auth - [GET] page without session")
-      .get(s"$baseOperatorUiUrl")
+      .get(s"$operatorUiBaseUrl")
       .disableFollowRedirect
       .check(status.is(303))
       .check(header("location").saveAs("protectedPageRedirect"))
@@ -40,7 +40,7 @@ object StrideAuthRequests {
 
   val postIdpSignInPage =
     http("Stride Auth - [POST] IdP login form")
-      .post(s"$baseAdminUrl$${formUrl}")
+      .post(s"$adminBaseUrl$${formUrl}")
       .disableFollowRedirect
       .formParam("RelayState", s"$${relayState}")
       .formParam("pid", "12345")
@@ -53,7 +53,7 @@ object StrideAuthRequests {
 
   val getSignInRedirect =
     http("Stride Auth - [GET] page w/ JS redirect to STRIDE Auth")
-      .get(s"$baseAdminUrl$${signInRedirect}")
+      .get(s"$adminBaseUrl$${signInRedirect}")
       .check(status.is(200))
       .check(savePageItem("formUrl", formUrlPattern))
       .check(savePageItem("samlResponse", samlResponsePattern))
