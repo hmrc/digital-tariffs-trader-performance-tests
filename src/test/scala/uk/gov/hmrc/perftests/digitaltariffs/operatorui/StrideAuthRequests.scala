@@ -2,11 +2,9 @@ package uk.gov.hmrc.perftests.digitaltariffs.operatorui
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
-object StrideAuthRequests {
-
-  private val adminBaseUrl = "https://admin.staging.tax.service.gov.uk"
-  private val operatorUiBaseUrl = s"$adminBaseUrl/tariff-classification"
+object StrideAuthRequests extends DigitalTariffsPerformanceTestRunner {
 
   private val relayStatePattern = """<input type="hidden" id="RelayState" name="RelayState" value="([^"]+)""""
   private val samlResponsePattern = """<input type="hidden" name="SAMLResponse" value="([^"]+)""""

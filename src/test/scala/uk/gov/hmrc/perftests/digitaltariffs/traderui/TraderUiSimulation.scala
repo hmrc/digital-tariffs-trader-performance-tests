@@ -10,7 +10,7 @@ import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 class TraderUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
 
   override val httpProtocol: HttpProtocolBuilder = {
-    buildHttpProtocol(url = "https://www.staging.tax.service.gov.uk")
+    buildHttpProtocol(url = externalBaseUrl)
   }
 
   private val scn =

@@ -18,17 +18,20 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
       .baseURL(url)
   }
 
+  protected val adminBaseUrl = "https://admin.staging.tax.service.gov.uk"
+  protected val externalBaseUrl = "https://www.staging.tax.service.gov.uk"
+
   protected val authStubBaseUrl = baseUrlFor("auth-login-stub") + "/auth-login-stub"
   protected val traderUiBaseUrl = baseUrlFor("binding-tariff-trader-frontend") + "/binding-tariff-application"
-  protected val operatorUiBaseUrl = baseUrlFor("tariff-classification-frontend") + "/tariff-classification"
+  protected val operatorUiBaseUrl = s"$adminBaseUrl/tariff-classification"
 
   protected val caseReference = "303"
   protected val eoriNumber = "AA000111222"
 
-  protected val waitTime = 3.seconds
+  protected val waitTime = 2.seconds
 
   protected val rate = 3
-  protected val rampInterval = 1.minute // 5.seconds
+  protected val rampInterval = 1.minute  // 5.seconds
   protected val mainInterval = 8.minutes // 15.seconds
 
   protected def simulationSteps: Seq[InjectionStep] =

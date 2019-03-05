@@ -11,11 +11,11 @@ import uk.gov.hmrc.perftests.digitaltariffs.operatorui.StrideAuthRequests._
 class OperatorUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
 
   override val httpProtocol: HttpProtocolBuilder = {
-    buildHttpProtocol(url = "https://admin.staging.tax.service.gov.uk")
+    buildHttpProtocol(url = adminBaseUrl)
   }
 
   private val scn =
-    scenario("HMRC Operator review a BTI application")
+    scenario("HMRC Operator reviews a BTI application")
       .exec(flushCookieJar)
       // Stride Auth Sign In
       .exec(getProtectedPageNoSession).exec(pause(waitTime))
