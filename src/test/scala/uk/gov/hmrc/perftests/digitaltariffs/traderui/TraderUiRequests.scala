@@ -3,9 +3,9 @@ package uk.gov.hmrc.perftests.digitaltariffs.traderui
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.digitaltariffs.CommonServices
+import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
-object TraderUiRequests extends CommonServices {
+object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def getStartPage: HttpRequestBuilder = {
     http("Get start")

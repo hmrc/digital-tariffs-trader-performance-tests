@@ -19,7 +19,7 @@ sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiSimulation'
 
 #### How to run the Gatling test for the Operational UI journey 
 ```
-TBC
+sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiSimulation'
 ```
 
 ---
@@ -36,5 +36,3 @@ https://github.com/hmrc/jenkins-config/blob/master/jobs/orchestration/staging/aw
 
 #### Performance testing documentation 
 https://confluence.tools.tax.service.gov.uk/display/DTRG/Performance+Testing
-
- 

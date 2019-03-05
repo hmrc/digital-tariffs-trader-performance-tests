@@ -3,20 +3,20 @@ package uk.gov.hmrc.perftests.digitaltariffs.traderui
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.digitaltariffs.CommonServices
+import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
-object AuthRequests extends CommonServices {
+object AuthRequests extends DigitalTariffsPerformanceTestRunner {
 
   def getGovGatewaySignIn: HttpRequestBuilder = {
     http("Government Gateway Sign In - GET")
-      .get(s"$authUrl/gg-sign-in")
+      .get(s"$authStubUrl/gg-sign-in")
       .check(css("input[name='csrfToken']", "value").saveAs("csrfToken"))
       .check(status.is(200))
   }
 
   def postGovGatewaySignIn: HttpRequestBuilder = {
     http("Government Gateway Sign In - POST")
-      .post(s"$authUrl/gg-sign-in")
+      .post(s"$authStubUrl/gg-sign-in")
       .formParam("csrfToken", "you-do-not-need-this-anymore")
       .formParam("authorityId", "")
       .formParam("redirectionUrl", traderUiBaseUrl)

@@ -1,46 +1,50 @@
 package uk.gov.hmrc.perftests.digitaltariffs.traderui
 
+import io.gatling.core.Predef._
+import io.gatling.http.protocol.HttpProtocolBuilder
 import uk.gov.hmrc.perftests.digitaltariffs.traderui.AuthRequests._
 import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests._
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import io.gatling.core.Predef._
-import io.gatling.http.Predef._
-import io.gatling.http.protocol.HttpProtocolBuilder
-import uk.gov.hmrc.perftests.digitaltariffs.CommonServices
+import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
-class TraderUiSimulation extends PerformanceTestRunner with CommonServices {
+class TraderUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
 
-  override val httpProtocol: HttpProtocolBuilder = http.userAgentHeader(userAgent)
+  override val httpProtocol: HttpProtocolBuilder = {
+    buildHttpProtocol(baseUrl = "https://www.staging.tax.service.gov.uk")
+  }
 
-  setup("government-gateway-login", "Government Gateway Login") withRequests (
-    getGovGatewaySignIn,
-    postGovGatewaySignIn
-  )
+  private val scn =
+    scenario("UK Trader applies for a BTI application")
+      // Government Gateway Sign In
+      .exec(getGovGatewaySignIn).exec(pause(waitTime))
+      .exec(postGovGatewaySignIn).exec(pause(waitTime))
+      // Trader UI journey
+      .exec(getStartPage).exec(pause(waitTime))
+      .exec(getBeforeYouStart).exec(pause(waitTime))
+      .exec(postBeforeYouStart).exec(pause(waitTime))
+      .exec(postRegisterForEori).exec(pause(waitTime))
+      .exec(postEnterContactDetails).exec(pause(waitTime))
+      .exec(postWhichBestDescribesYou).exec(pause(waitTime))
+      .exec(postSelectApplicationType).exec(pause(waitTime))
+      .exec(postAcceptItemInfoList).exec(pause(waitTime))
+      .exec(postInformationAboutYourItem).exec(pause(waitTime))
+      .exec(postConfidentialInformation).exec(pause(waitTime))
+      .exec(postDescribeYourItem).exec(pause(waitTime))
+      .exec(postSupportingMaterialFileList).exec(pause(waitTime))
+      .exec(postCommodityCodeBestMatch).exec(pause(waitTime))
+      .exec(postCommodityCodeDigits).exec(pause(waitTime))
+      .exec(postWhenToSendSample).exec(pause(waitTime))
+      .exec(postReturnSample).exec(pause(waitTime))
+      .exec(postSimilarItemCommodityCode).exec(pause(waitTime))
+      .exec(postLegalChallenge).exec(pause(waitTime))
+      .exec(postSupportingInformation).exec(pause(waitTime))
+      .exec(postSupportingInformationDetails).exec(pause(waitTime))
+      .exec(postCheckYourAnswers).exec(pause(waitTime))
+      .exec(postDeclaration).exec(pause(waitTime))
 
-  setup("trader-BTI-application", "Trader applies for a ruling commodity code") withActions (
-    getStartPage, pause,
-    getBeforeYouStart, pause,
-    postBeforeYouStart, pause,
-    postRegisterForEori, pause,
-    postEnterContactDetails, pause,
-    postWhichBestDescribesYou, pause,
-    postSelectApplicationType, pause,
-    postAcceptItemInfoList, pause,
-    postInformationAboutYourItem, pause,
-    postConfidentialInformation, pause,
-    postDescribeYourItem, pause,
-    postSupportingMaterialFileList, pause,
-    postCommodityCodeBestMatch, pause,
-    postCommodityCodeDigits, pause,
-    postWhenToSendSample, pause,
-    postReturnSample, pause,
-    postSimilarItemCommodityCode, pause,
-    postLegalChallenge, pause,
-    postSupportingInformation, pause,
-    postSupportingInformationDetails, pause,
-    postCheckYourAnswers, pause,
-    postDeclaration
-  )
+  // TODO: when the `performance-test-runner` is fixed, we should use it here
+  setUp(scn.inject(simulationSteps))
+    .protocols(httpProtocol)
+    .assertions(simulationAssertion)
 
-  runSimulation()
 }
