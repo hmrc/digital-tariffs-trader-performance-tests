@@ -30,7 +30,7 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
 
   protected val waitTime = 2.seconds
 
-  protected val rate = 1
+  protected val rate = 0.1D
   protected val rampInterval = 1.minute  // 5.seconds
   protected val mainInterval = 8.minutes // 15.seconds
 
