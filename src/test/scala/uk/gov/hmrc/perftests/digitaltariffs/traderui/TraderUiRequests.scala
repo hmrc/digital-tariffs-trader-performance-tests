@@ -7,11 +7,13 @@ import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
 object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
+  private val homePage = s"$traderUiBaseUrl/applications"
+
   def getStartPage: HttpRequestBuilder = {
     http("Get start")
       .get(traderUiBaseUrl)
       .check(status.is(200))
-      .check(currentLocation.is(traderUiBaseUrl))
+      .check(currentLocation.is(homePage))
   }
 
   def getBeforeYouStart: HttpRequestBuilder = {

@@ -7,10 +7,12 @@ import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
 object OperatorUiRequests extends DigitalTariffsPerformanceTestRunner {
 
+  private val homePage = s"$operatorUiBaseUrl/queues/my-cases"
+
   def getStartPage: HttpRequestBuilder = {
     http("Home Page")
       .get(operatorUiBaseUrl)
-      .check(currentLocation.is(operatorUiBaseUrl + "/queues/my-cases"))
+      .check(currentLocation.is(homePage))
       .check(status.is(200))
   }
 
