@@ -18,21 +18,21 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def getBeforeYouStart: HttpRequestBuilder = {
     http("Before You Start - GET")
-      .get(s"$traderUiBaseUrl/beforeYouStart")
+      .get(s"$traderUiBaseUrl/information-you-need")
       .check(css("input[name='csrfToken']", "value").saveAs("csrfToken"))
       .check(status.is(200))
   }
 
   def postBeforeYouStart: HttpRequestBuilder = {
     http("Before You Start - POST")
-      .post(s"$traderUiBaseUrl/beforeYouStart")
+      .post(s"$traderUiBaseUrl/information-you-need")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(200))
   }
 
   def postRegisterForEori: HttpRequestBuilder = {
     http("Registered Address For Eori - POST")
-      .post(s"$traderUiBaseUrl/registeredAddressForEori")
+      .post(s"$traderUiBaseUrl/registered-address-for-eori")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("field1", "Digital Tariffs Limited Company")
       .formParam("field2", "Victoria Road 10")
@@ -44,7 +44,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postEnterContactDetails: HttpRequestBuilder = {
     http("Enter Contact Details - POST")
-      .post(s"$traderUiBaseUrl/enterContactDetails")
+      .post(s"$traderUiBaseUrl/enter-contact-details")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("field1", "Joe Bloggs")
       .formParam("field2", "joe.bloggs@example.sh")
@@ -54,7 +54,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postWhichBestDescribesYou: HttpRequestBuilder = {
     http("Which Best Describes You")
-      .post(s"$traderUiBaseUrl/whichBestDescribesYou")
+      .post(s"$traderUiBaseUrl/who-is-the-application-for")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "businessOwner")
       .check(status.is(200))
@@ -62,7 +62,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postSelectApplicationType: HttpRequestBuilder = {
     http("Select Application Type")
-      .post(s"$traderUiBaseUrl/selectApplicationType")
+      .post(s"$traderUiBaseUrl/new-application-or-renewal")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "newCommodity")
       .check(status.is(200))
@@ -70,14 +70,14 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postAcceptItemInfoList: HttpRequestBuilder = {
     http("Accept Item Information List")
-      .post(s"$traderUiBaseUrl/acceptItemInformationList")
+      .post(s"$traderUiBaseUrl/information-you-must-provide")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(200))
   }
 
   def postInformationAboutYourItem: HttpRequestBuilder = {
     http("Information About Your Item")
-      .post(s"$traderUiBaseUrl/informationAboutYourItem")
+      .post(s"$traderUiBaseUrl/do-you-have-confidential-information")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
@@ -85,7 +85,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postConfidentialInformation: HttpRequestBuilder = {
     http("Confidential Information")
-      .post(s"$traderUiBaseUrl/confidentialInformation")
+      .post(s"$traderUiBaseUrl/enter-confidential-information")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("field1", "This is a secret application")
       .check(status.is(200))
@@ -93,7 +93,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postDescribeYourItem: HttpRequestBuilder = {
     http("Describe Your Item")
-      .post(s"$traderUiBaseUrl/describeYourItem")
+      .post(s"$traderUiBaseUrl/describe-your-item")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("field1", "tennis racket")
       .formParam("field2", "Wilson tennis racket 100 square inches head")
@@ -102,7 +102,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postSupportingMaterialFileList: HttpRequestBuilder = {
     http("Supporting Material File List")
-      .post(s"$traderUiBaseUrl/supportingMaterialFileList")
+      .post(s"$traderUiBaseUrl/do-you-have-supporting-documents")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("add-file-choice", "false") // for simplicity we do not send files in Jenkins
       .check(status.is(200))
@@ -110,7 +110,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
   
   def postCommodityCodeBestMatch: HttpRequestBuilder = {
     http("Commodity Code Best Match")
-      .post(s"$traderUiBaseUrl/commodityCodeBestMatch")
+      .post(s"$traderUiBaseUrl/have-you-found-commodity-code")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
@@ -118,7 +118,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postCommodityCodeDigits: HttpRequestBuilder = {
     http("Commodity Code Digits")
-      .post(s"$traderUiBaseUrl/commodityCodeDigits")
+      .post(s"$traderUiBaseUrl/what-is-the-commodity-code")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "95065100")
       .check(status.is(200))
@@ -126,7 +126,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postWhenToSendSample: HttpRequestBuilder = {
     http("When To Send Sample")
-      .post(s"$traderUiBaseUrl/whenToSendSample")
+      .post(s"$traderUiBaseUrl/are-you-sending-samples")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
@@ -134,7 +134,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postReturnSample: HttpRequestBuilder = {
     http("Return Samples")
-      .post(s"$traderUiBaseUrl/returnSamples")
+      .post(s"$traderUiBaseUrl/should-the-samples-be-returned")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "noDontReturnSamples") // TODO: change it to "false" if this will be refactored
       .check(status.is(200))
@@ -142,7 +142,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postSimilarItemCommodityCode: HttpRequestBuilder = {
     http("Similar Item Commodity Code")
-      .post(s"$traderUiBaseUrl/similarItemCommodityCode")
+      .post(s"$traderUiBaseUrl/similar-item-bti-ruling")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "false")
       .check(status.is(200))
@@ -150,7 +150,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postLegalChallenge: HttpRequestBuilder = {
     http("Legal Challenge")
-      .post(s"$traderUiBaseUrl/legalChallenge")
+      .post(s"$traderUiBaseUrl/any-problems-classifying-item")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "false")
       .check(status.is(200))
@@ -158,7 +158,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postSupportingInformation: HttpRequestBuilder = {
     http("Supporting Information")
-      .post(s"$traderUiBaseUrl/supportingInformation")
+      .post(s"$traderUiBaseUrl/any-other-supporting-information")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
@@ -166,7 +166,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postSupportingInformationDetails: HttpRequestBuilder = {
     http("Supporting Information Details")
-      .post(s"$traderUiBaseUrl/supportingInformationDetails")
+      .post(s"$traderUiBaseUrl/what-is-the-information-you-want-to-provide")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "All these rackets are made of aluminium")
       .check(status.is(200))
@@ -181,7 +181,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postDeclaration: HttpRequestBuilder = {
     http("Declaration")
-      .post(s"$traderUiBaseUrl/declaration")
+      .post(s"$traderUiBaseUrl/apply-for-a-ruling")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(200))
   }
