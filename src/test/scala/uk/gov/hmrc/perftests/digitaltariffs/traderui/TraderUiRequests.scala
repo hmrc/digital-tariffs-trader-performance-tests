@@ -17,16 +17,15 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
   }
 
   def getBeforeYouStart: HttpRequestBuilder = {
-    http("Before You Start - GET")
+    http("Before You Start")
       .get(s"$traderUiBaseUrl/information-you-need")
-      .check(css("input[name='csrfToken']", "value").saveAs("csrfToken"))
       .check(status.is(200))
   }
 
-  def postBeforeYouStart: HttpRequestBuilder = {
-    http("Before You Start - POST")
-      .post(s"$traderUiBaseUrl/information-you-need")
-      .formParam("csrfToken", s"$${csrfToken}")
+  def getRegisterForEori: HttpRequestBuilder = {
+    http("Registered Address For Eori - GET")
+      .get(s"$traderUiBaseUrl/registered-address-for-eori")
+      .check(css("input[name='csrfToken']", "value").saveAs("csrfToken"))
       .check(status.is(200))
   }
 
@@ -34,11 +33,12 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
     http("Registered Address For Eori - POST")
       .post(s"$traderUiBaseUrl/registered-address-for-eori")
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("field1", "Digital Tariffs Limited Company")
-      .formParam("field2", "Victoria Road 10")
-      .formParam("field3", "Shipley")
-      .formParam("field4", "LS10 6HT")
-      .formParam("field5", "UK")
+      .formParam("eori", eoriNumber)
+      .formParam("businessName", "Digital Tariffs Limited Company")
+      .formParam("addressLine1", "Victoria Road 10")
+      .formParam("townOrCity", "Shipley")
+      .formParam("postcode", "LS10 6HT")
+      .formParam("country", "UK")
       .check(status.is(200))
   }
 
@@ -68,15 +68,21 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
       .check(status.is(200))
   }
 
-  def postAcceptItemInfoList: HttpRequestBuilder = {
+  def getAcceptItemInfoList: HttpRequestBuilder = {
     http("Accept Item Information List")
-      .post(s"$traderUiBaseUrl/information-you-must-provide")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .get(s"$traderUiBaseUrl/information-you-must-provide")
+      .check(status.is(200))
+  }
+
+  def getInformationAboutYourItem: HttpRequestBuilder = {
+    http("Information About Your Item - GET")
+      .get(s"$traderUiBaseUrl/do-you-have-confidential-information")
+      .formParam("value", "true")
       .check(status.is(200))
   }
 
   def postInformationAboutYourItem: HttpRequestBuilder = {
-    http("Information About Your Item")
+    http("Information About Your Item - POST")
       .post(s"$traderUiBaseUrl/do-you-have-confidential-information")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
@@ -172,17 +178,28 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
       .check(status.is(200))
   }
 
-  def postCheckYourAnswers: HttpRequestBuilder = {
+  def getCheckYourAnswers: HttpRequestBuilder = {
     http("Check Your Answers")
-      .post(s"$traderUiBaseUrl/check-your-answers")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .get(s"$traderUiBaseUrl/check-your-answers")
+      .check(status.is(200))
+  }
+
+  def getDeclaration: HttpRequestBuilder = {
+    http("Declaration - GET")
+      .get(s"$traderUiBaseUrl/apply-for-a-ruling")
       .check(status.is(200))
   }
 
   def postDeclaration: HttpRequestBuilder = {
-    http("Declaration")
+    http("Declaration - POST")
       .post(s"$traderUiBaseUrl/apply-for-a-ruling")
       .formParam("csrfToken", s"$${csrfToken}")
+      .check(status.is(200))
+  }
+
+  def getConfirmation: HttpRequestBuilder = {
+    http("Confirmation")
+      .get(s"$traderUiBaseUrl/confirmation")
       .check(status.is(200))
   }
 
