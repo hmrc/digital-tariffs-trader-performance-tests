@@ -74,35 +74,13 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
       .check(status.is(200))
   }
 
-  def getInformationAboutYourItem: HttpRequestBuilder = {
-    http("Information About Your Item - GET")
-      .get(s"$traderUiBaseUrl/do-you-have-confidential-information")
-      .formParam("value", "true")
-      .check(status.is(200))
-  }
-
-  def postInformationAboutYourItem: HttpRequestBuilder = {
-    http("Information About Your Item - POST")
-      .post(s"$traderUiBaseUrl/do-you-have-confidential-information")
-      .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("value", "true")
-      .check(status.is(200))
-  }
-
-  def postConfidentialInformation: HttpRequestBuilder = {
-    http("Confidential Information")
-      .post(s"$traderUiBaseUrl/enter-confidential-information")
-      .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("field1", "This is a secret application")
-      .check(status.is(200))
-  }
-
   def postDescribeYourItem: HttpRequestBuilder = {
     http("Describe Your Item")
       .post(s"$traderUiBaseUrl/describe-your-item")
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("field1", "tennis racket")
-      .formParam("field2", "Wilson tennis racket 100 square inches head")
+      .formParam("name", "tennis racket")
+      .formParam("description", "Wilson tennis racket 100 square inches head")
+      .formParam("confidentialInformation", "Top secret development")
       .check(status.is(200))
   }
 
