@@ -23,12 +23,13 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
 
   protected val authStubBaseUrl = baseUrlFor("auth-login-stub") + "/auth-login-stub"
   protected val traderUiBaseUrl = baseUrlFor("binding-tariff-trader-frontend") + "/binding-tariff-application"
+  protected val adviceUiBaseUrl = baseUrlFor("binding-tariff-advice-frontend") + "/classification-advice"
   protected val operatorUiBaseUrl = s"$adminBaseUrl/tariff-classification"
 
   protected val caseReference = "303"
   protected val eoriNumber = "AA000111222"
 
-  protected val waitTime = 2.seconds
+  protected val waitTime = 1.seconds
 
   protected val rate = 0.5D
   protected val rampInterval = 1.minute  // 5.seconds

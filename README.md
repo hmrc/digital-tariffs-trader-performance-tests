@@ -17,6 +17,11 @@ sbt gatling:test
 sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiSimulation'
 ```
 
+#### How to run the Gatling test for the Advice UI journey 
+```
+sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.adviceui.AdviceUiSimulation'
+```
+
 #### How to run the Gatling test for the Operational UI journey 
 ```
 sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiSimulation'
