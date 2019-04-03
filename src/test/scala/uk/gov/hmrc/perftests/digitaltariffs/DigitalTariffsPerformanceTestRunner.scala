@@ -23,6 +23,7 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
 
   protected val authStubBaseUrl = baseUrlFor("auth-login-stub") + "/auth-login-stub"
   protected val traderUiBaseUrl = baseUrlFor("binding-tariff-trader-frontend") + "/binding-tariff-application"
+  protected val rulingUiBaseUrl = baseUrlFor("binding-tariff-ruling-frontend") + "/binding-tariff-rulings"
   protected val adviceUiBaseUrl = baseUrlFor("binding-tariff-advice-frontend") + "/classification-advice"
   protected val operatorUiBaseUrl = s"$adminBaseUrl/tariff-classification"
 

@@ -7,23 +7,16 @@ This repository contains the Gatling performance/load tests for the Digital Tari
 
 ## Commands for running the Gatling tests from the local terminal
 
-#### How to run all available Gatling tests 
+#### command for running all Gatling simulations 
 ```
 sbt gatling:test
 ```
 
-#### How to run the Gatling test for the Trader UI journey 
+#### commands for running the Gatling simulations individually:
 ```
 sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiSimulation'
-```
-
-#### How to run the Gatling test for the Advice UI journey 
-```
 sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.adviceui.AdviceUiSimulation'
-```
-
-#### How to run the Gatling test for the Operational UI journey 
-```
+sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.rulingui.RulingUiSimulation'
 sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiSimulation'
 ```
 
