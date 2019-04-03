@@ -100,4 +100,16 @@ object OperatorUiRequests extends DigitalTariffsPerformanceTestRunner {
       .check(status.is(200))
   }
 
+  def searchPage: HttpRequestBuilder = {
+    http("Search Page")
+      .get(s"$operatorUiBaseUrl/search")
+      .check(status.is(200))
+  }
+
+  def getQueryResultPage: HttpRequestBuilder = {
+    http("Search Results")
+      .get(s"$operatorUiBaseUrl/search?trader_name=John+Lewis&commodity_code=&decision_details=&keyword%5B0%5D=&live_rulings_only=true")
+      .check(status.is(200))
+  }
+
 }

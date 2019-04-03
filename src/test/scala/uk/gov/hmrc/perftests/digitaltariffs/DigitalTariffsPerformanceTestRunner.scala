@@ -1,8 +1,8 @@
 package uk.gov.hmrc.perftests.digitaltariffs
 
 import io.gatling.core.Predef._
-import io.gatling.http.Predef.http
 import io.gatling.core.controller.inject.InjectionStep
+import io.gatling.http.Predef.http
 import io.gatling.http.protocol.HttpProtocolBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner

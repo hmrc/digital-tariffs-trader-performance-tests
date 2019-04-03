@@ -3,9 +3,9 @@ package uk.gov.hmrc.perftests.digitaltariffs.operatorui
 import io.gatling.core.Predef._
 import io.gatling.http.Predef.flushCookieJar
 import io.gatling.http.protocol.HttpProtocolBuilder
-import uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiRequests._
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
+import uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiRequests._
 import uk.gov.hmrc.perftests.digitaltariffs.operatorui.StrideAuthRequests._
 
 class OperatorUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
@@ -41,6 +41,8 @@ class OperatorUiSimulation extends PerformanceTestRunner with DigitalTariffsPerf
       .exec(getCaseActivity).exec(pause(waitTime))
       .exec(getCaseKeywords).exec(pause(waitTime))
       .exec(getCaseRuling).exec(pause(waitTime))
+      .exec(searchPage).exec(pause(waitTime))
+      .exec(getQueryResultPage).exec(pause(waitTime))
 
   // TODO: when the `performance-test-runner` is fixed, we should use it here
     setUp(scn.inject(simulationSteps))
