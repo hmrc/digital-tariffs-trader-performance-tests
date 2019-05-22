@@ -27,7 +27,6 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
   protected val adviceUiBaseUrl = baseUrlFor("binding-tariff-advice-frontend") + "/classification-advice"
   protected val operatorUiBaseUrl = s"$adminBaseUrl/tariff-classification"
 
-  protected val caseReference = "303"
   protected val eoriNumber = "AA000111222"
 
   protected val waitTime = 1.seconds

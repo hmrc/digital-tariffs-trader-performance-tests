@@ -35,6 +35,7 @@ class OperatorUiSimulation extends PerformanceTestRunner with DigitalTariffsPerf
       .exec(getActQueue).exec(pause(waitTime))
       .exec(getCapQueue).exec(pause(waitTime))
       .exec(getMyCases).exec(pause(waitTime))
+      .exec(findValidCaseReference).exec(pause(waitTime))
       .exec(getCaseTraderDetails).exec(pause(waitTime))
       .exec(getCaseApplicationDetails).exec(pause(waitTime))
       .exec(getCaseAttachments).exec(pause(waitTime))
