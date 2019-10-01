@@ -61,14 +61,12 @@ object OperatorUiRequests extends DigitalTariffsPerformanceTestRunner {
   def getCaseTraderDetails: HttpRequestBuilder = {
     http(s"View Case Trader Details")
       .get(operatorUiBaseUrl + "/cases/${case_reference}")
-      .disableFollowRedirect
       .check(status.is(200))
   }
 
   def getCaseApplicationDetails: HttpRequestBuilder = {
     http(s"View Case Application Details")
-      .get(operatorUiBaseUrl + "/cases/${case_reference}/application")
-      .disableFollowRedirect
+      .get(operatorUiBaseUrl + "/cases/${case_reference}/item")
       .check(status.is(200))
   }
 
@@ -114,7 +112,7 @@ object OperatorUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def findValidCaseReference: HttpRequestBuilder = {
     http("Find Valid Case Reference")
-      .get(s"$operatorUiBaseUrl/search?trader_name=.*&commodity_code=&decision_details=&keyword%5B0%5D=&status%5B0%5D=OPEN&status%5B1%5D=LIVE#advanced_search_keywords")
+      .get(s"$operatorUiBaseUrl/search?trader_name=.*&commodity_code=&decision_details=&keyword%5B0%5D=&application_type%5B0%5D=BTI&status%5B0%5D=OPEN&status%5B1%5D=LIVE&status%5B4%5D=NEW&selectedTab=details#advanced_search-results_and_filters")
       .check(status.is(200))
       .check(css("a#advanced_search_results-row-0-reference").find.saveAs("case_reference"))
   }
