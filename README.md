@@ -9,8 +9,15 @@ This repository contains the Gatling performance/load tests for the Digital Tari
 
 #### command for running all Gatling simulations 
 ```
-sbt gatling:test
+sbt gatling:test or
+
+run the shell script for all tests by executing: ./run.sh
+
+or run shell script for smoke tests by executing: ./run_smoke_test.sh
+
 ```
+
+or
 
 #### commands for running the Gatling simulations individually:
 ```
