@@ -54,7 +54,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postWhichBestDescribesYou: HttpRequestBuilder = {
     http("Which Best Describes You")
-      .post(s"$traderUiBaseUrl/who-is-the-application-for")
+      .post(s"$traderUiBaseUrl/who-is-this-application-for")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "businessOwner")
       .check(status.is(200))
@@ -118,7 +118,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postReturnSample: HttpRequestBuilder = {
     http("Return Samples")
-      .post(s"$traderUiBaseUrl/should-the-samples-be-returned")
+      .post(s"$traderUiBaseUrl/would-you-like-the-samples-returned")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "noDontReturnSamples") // TODO: change it to "false" if this will be refactored
       .check(status.is(200))
@@ -177,7 +177,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def getConfirmation: HttpRequestBuilder = {
     http("Confirmation")
-      .get(s"$traderUiBaseUrl/confirmation")
+      .get(s"$traderUiBaseUrl/application-complete")
       .check(status.is(200))
   }
 

@@ -9,7 +9,7 @@ scalaVersion := "2.11.11"
 
 val gatlingVersion = "2.2.5"
 
-libraryDependencies ++= Seq(
+libraryDependencies ++= Seq("io.gatling" % "gatling-core" % "2.2.5",
   "com.github.nscala-time" %% "nscala-time" % "2.22.0",
   "com.typesafe" % "config" % "1.3.3",
   "com.typesafe.play" % "play-json_2.11" % "2.4.3",
