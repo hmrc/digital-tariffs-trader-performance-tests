@@ -16,8 +16,16 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
       .check(currentLocation.is(homePage))
   }
 
-  def getBeforeYouStart: HttpRequestBuilder = {
-    http("Before You Start")
+  def postImportOrExport: HttpRequestBuilder = {
+    http("What do you want to do?")
+      .post(s"$traderUiBaseUrl/import-or-export")
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("value", "import")
+      .check(status.is(200))
+  }
+
+  def getInformationYouNeed: HttpRequestBuilder = {
+    http("Information you need to apply for a ruling")
       .get(s"$traderUiBaseUrl/information-you-need")
       .check(status.is(200))
   }

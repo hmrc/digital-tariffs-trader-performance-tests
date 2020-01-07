@@ -20,7 +20,8 @@ class TraderUiSimulation extends PerformanceTestRunner with DigitalTariffsPerfor
       .exec(postGovGatewaySignIn).exec(pause(waitTime))
       // Trader UI journey
       .exec(getStartPage).exec(pause(waitTime))
-      .exec(getBeforeYouStart).exec(pause(waitTime))
+      .exec(postImportOrExport).exec(pause(waitTime))
+      .exec(getInformationYouNeed).exec(pause(waitTime))
       .exec(getRegisterForEori).exec(pause(waitTime))
       .exec(postRegisterForEori).exec(pause(waitTime))
       .exec(postEnterContactDetails).exec(pause(waitTime))
