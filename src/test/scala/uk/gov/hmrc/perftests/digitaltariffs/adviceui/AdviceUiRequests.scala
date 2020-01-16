@@ -33,8 +33,8 @@ object AdviceUiRequests extends DigitalTariffsPerformanceTestRunner {
   }
 
   def postGoodDetails: HttpRequestBuilder = {
-    http("Good Details")
-      .post(s"$adviceUiBaseUrl/good-details")
+    http("Detailed Description")
+      .post(s"$adviceUiBaseUrl/detailed-description")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("item-name", "cocaine")
       .formParam("description", "Item imported from Colombia, but for medical purpose only")
@@ -42,8 +42,8 @@ object AdviceUiRequests extends DigitalTariffsPerformanceTestRunner {
   }
 
   def postSupportingDocuments: HttpRequestBuilder = {
-    http("Supporting Documents")
-      .post(s"$adviceUiBaseUrl/supporting-documents")
+    http("Supporting Documents Photos")
+      .post(s"$adviceUiBaseUrl/supporting-documents-photos")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("state", "false") // for simplicity we do not send files in Jenkins
       .check(status.is(200))
