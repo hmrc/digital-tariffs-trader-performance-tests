@@ -62,7 +62,7 @@ object AdviceUiRequests extends DigitalTariffsPerformanceTestRunner {
       .post(s"$adviceUiBaseUrl/check-your-answers")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(200))
-      .check(currentLocation.is(s"$adviceUiBaseUrl/confirmation"))
+      .check(currentLocation.is(s"$adviceUiBaseUrl/application-submitted"))
   }
 
 }
