@@ -61,9 +61,9 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
     http("Enter Contact Details - POST")
       .post(s"$traderUiBaseUrl/enter-contact-details")
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("field1", "Joe Bloggs")
-      .formParam("field2", "joe.bloggs@example.sh")
-      .formParam("field3", "0123456789")
+      .formParam("name", "Joe Bloggs")
+      .formParam("email", "joe.bloggs@example.sh")
+      .formParam("phoneNumber", "0123456789")
       .check(status.is(200))
   }
 
