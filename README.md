@@ -1,43 +1,8 @@
 
-# Digital Tariffs Performance Tests
+# digital-tariffs-trader-performance-tests
 
-This repository contains the Gatling performance/load tests for the Digital Tariffs microservices.
+This is a placeholder README.md for a new repository
 
----
+### License
 
-## Commands for running the Gatling tests from the local terminal
-
-#### command for running all Gatling simulations 
-```
-sbt gatling:test or
-
-run the shell script for all tests by executing: ./run.sh
-
-or run shell script for smoke tests by executing: ./run_smoke_test.sh
-
-```
-
-or
-
-#### commands for running the Gatling simulations individually:
-```
-sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiSimulation'
-sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.adviceui.AdviceUiSimulation'
-sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.rulingui.RulingUiSimulation'
-sbt 'testOnly uk.gov.hmrc.perftests.digitaltariffs.operatorui.OperatorUiSimulation'
-```
-
----
-
-## Jenkins
-
-#### Jenkins job
-https://deploy-staging.tax.service.gov.uk/job/digital-tariffs-performance-tests/
-
-#### Jenkins configurations
-https://github.com/hmrc/jenkins-config/blob/master/jobs/orchestration/staging/aws_eu_west_1/digital-tariffs.groovy
-
----
-
-#### Performance testing documentation 
-https://confluence.tools.tax.service.gov.uk/display/DTRG/Performance+Testing
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
