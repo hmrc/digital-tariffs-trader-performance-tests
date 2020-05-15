@@ -1,7 +1,7 @@
 import io.gatling.sbt.GatlingPlugin
 
 
-name := "digital-tariffs-performance-tests"
+name := "digital-tariffs-trader-performance-tests"
 
 version := "1.0"
 
