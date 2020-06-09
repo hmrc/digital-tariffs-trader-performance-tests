@@ -5,11 +5,21 @@ This is a placeholder README.md for a new repository
 ## Commands for running the Gatling tests from the local terminal
 
 #### command for running all Gatling simulations 
+##### command for running all Gatling simulations in Staging
 ```
 sbt gatling:test or 
 run the shell script for all tests by executing: ./run.sh
 
 To run smoke test run shell script for smoke tests by executing: ./run_smoke_test.sh or 
+sbt -Dperftest.runSmokeTest=true -DrunLocal=false gatling:test
+
+```
+
+##### command for running all Gatling simulations in Localhost
+```
+sbt -DrunLocal=true gatling:test or
+
+To run smoke test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true gatling:test
 
 ```
