@@ -22,7 +22,7 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
   protected val externalBaseUrl = "https://www.staging.tax.service.gov.uk"
 
   protected val authStubBaseUrl = baseUrlFor("auth-login-stub") + "/auth-login-stub"
-  protected val traderUiBaseUrl = baseUrlFor("binding-tariff-trader-frontend") + "/binding-tariff-application"
+  protected val traderUiBaseUrl = baseUrlFor("binding-tariff-trader-frontend") + "/advance-tariff-application"
 
   protected val eoriNumber = "AA000111222"
 
