@@ -141,7 +141,7 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
   def postSimilarItemCommodityCode: HttpRequestBuilder = {
     http("Similar Item Commodity Code")
-      .post(s"$traderUiBaseUrl/similar-item-bti-ruling")
+      .post(s"$traderUiBaseUrl/similar-item-advance-tariff-ruling")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "false")
       .check(status.is(200))
