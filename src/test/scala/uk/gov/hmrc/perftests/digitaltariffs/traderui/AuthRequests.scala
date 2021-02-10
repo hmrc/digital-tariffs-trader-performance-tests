@@ -25,11 +25,10 @@ object AuthRequests extends DigitalTariffsPerformanceTestRunner {
       .formParam("affinityGroup", "Individual")
       .formParam("email", "user@test.com")
       .formParam("credentialRole", "User")
-      .formParam("enrolment[0].name", "HMRC-CUS-ORG")
+      .formParam("enrolment[0].name", "HMRC-ATAR-ORG")
       .formParam("enrolment[0].taxIdentifier[0].name", "EORINumber")
       .formParam("enrolment[0].taxIdentifier[0].value", eoriNumber)
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(200))
   }
-
 }
