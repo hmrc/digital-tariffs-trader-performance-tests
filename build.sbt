@@ -22,4 +22,3 @@ enablePlugins(GatlingPlugin)
 
 parallelExecution in Test := false
 
-resolvers := Seq(Resolver.bintrayRepo("hmrc", "releases"))
