@@ -7,7 +7,7 @@ import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
 
 object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
 
-  private val homePage = s"$traderUiBaseUrl/applications-and-rulings?enableTrackingConsent=true"
+  private val homePage = s"$traderUiBaseUrl/applications-and-rulings"
 
   def getStartPage: HttpRequestBuilder = {
     http("Get start")
@@ -31,164 +31,192 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
   def getGoodsName: HttpRequestBuilder = {
     http("Provide a name for the goods")
       .get(s"$traderUiBaseUrl/provide-goods-name")
+      .check(status.is(200))
+      .check(saveCsrfToken)
+  }
+
+  def postGoodsName: HttpRequestBuilder = {
+    http("Provide a name for the goods")
+      .post(s"$traderUiBaseUrl/provide-goods-name")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("goodsName", "Snow man jacket")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getGoodsDescription: HttpRequestBuilder = {
+  def postGoodsDescription: HttpRequestBuilder = {
     http("Provide a detailed description")
-      .get(s"$traderUiBaseUrl/provide-goods-description")
+      .post(s"$traderUiBaseUrl/provide-goods-description")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("goodsDescription", "Snow man jacket in black colour")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getConfidentialInfo: HttpRequestBuilder = {
+  def postConfidentialInfo: HttpRequestBuilder = {
     http("Do you want to add any confidential information")
-      .get(s"$traderUiBaseUrl/add-confidential-information")
+      .post(s"$traderUiBaseUrl/add-confidential-information")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getProvideConfidentialInfo: HttpRequestBuilder = {
+  def postProvideConfidentialInfo: HttpRequestBuilder = {
     http("Provide any confidential information")
-      .get(s"$traderUiBaseUrl/provide-confidential-information")
+      .post(s"$traderUiBaseUrl/provide-confidential-information")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("confidentialInformation", "I have used colour to pain your snow man")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getUploadSupportingDocument: HttpRequestBuilder = {
+  def postUploadSupportingDocument: HttpRequestBuilder = {
     http("Do you want to upload any supporting documents?")
-      .get(s"$traderUiBaseUrl/add-supporting-documents")
+      .post(s"$traderUiBaseUrl/add-supporting-documents")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "false") // for simplicity we do not send files in Jenkins
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getAreYouSendingASample: HttpRequestBuilder = {
+  def postAreYouSendingASample: HttpRequestBuilder = {
     http("Are you sending a sample")
-      .get(s"$traderUiBaseUrl/are-you-sending-samples")
+      .post(s"$traderUiBaseUrl/are-you-sending-samples")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getCouldSampleBeHazardous: HttpRequestBuilder = {
+  def postCouldSampleBeHazardous: HttpRequestBuilder = {
     http("Could the sample be potentially hazardous?")
-      .get(s"$traderUiBaseUrl/is-sample-hazardous")
+      .post(s"$traderUiBaseUrl/is-sample-hazardous")
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("value", "false")
+      .formParam("isSampleHazardous", "false")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getReturnSample: HttpRequestBuilder = {
+  def postReturnSample: HttpRequestBuilder = {
     http("Return Samples")
-      .get(s"$traderUiBaseUrl/would-you-like-the-samples-returned")
+      .post(s"$traderUiBaseUrl/would-you-like-the-samples-returned")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "false")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getHaveYouFoundCommodityCode: HttpRequestBuilder = {
+  def postHaveYouFoundCommodityCode: HttpRequestBuilder = {
     http("Have you found a commodity code")
-      .get(s"$traderUiBaseUrl/have-you-found-commodity-code")
+      .post(s"$traderUiBaseUrl/have-you-found-commodity-code")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getCommodityCodeDigits: HttpRequestBuilder = {
+  def postCommodityCodeDigits: HttpRequestBuilder = {
     http("Provide a commodity code")
-      .get(s"$traderUiBaseUrl/provide-commodity-code")
+      .post(s"$traderUiBaseUrl/provide-commodity-code")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "95065100")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getLegalChallenge: HttpRequestBuilder = {
+  def postLegalChallenge: HttpRequestBuilder = {
     http("Have there been any legal challenges")
-      .get(s"$traderUiBaseUrl/any-legal-challenges-classifying-goods")
+      .post(s"$traderUiBaseUrl/any-legal-challenges-classifying-goods")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getLegalChallengeDetails: HttpRequestBuilder = {
+  def postLegalChallengeDetails: HttpRequestBuilder = {
     http("Provide details of any legal challenges ")
-      .get(s"$traderUiBaseUrl/provide-details-of-legal-challenges")
+      .post(s"$traderUiBaseUrl/provide-details-of-legal-challenges")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("legalChallengeDetails", "So many challenges")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getPreviousRulingReference: HttpRequestBuilder = {
+  def postPreviousRulingReference: HttpRequestBuilder = {
     http("Do you have a previous ruling reference")
-      .get(s"$traderUiBaseUrl/previous-ruling-reference")
+      .post(s"$traderUiBaseUrl/previous-ruling-reference")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getProvidePreviousRulingReference: HttpRequestBuilder = {
+  def postProvidePreviousRulingReference: HttpRequestBuilder = {
     http("Provide the reference number")
-      .get(s"$traderUiBaseUrl/provide-previous-ruling-reference")
+      .post(s"$traderUiBaseUrl/provide-previous-ruling-reference")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("btiReference", "GB12345678")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getSimilarRuling: HttpRequestBuilder = {
+  def postSimilarRuling: HttpRequestBuilder = {
     http("Are there similar goods")
-      .get(s"$traderUiBaseUrl/ruling-on-similar-goods")
+      .post(s"$traderUiBaseUrl/ruling-on-similar-goods")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getProvideSimilarRulingReference: HttpRequestBuilder = {
+  def postProvideSimilarRulingReference: HttpRequestBuilder = {
     http("Provide the reference number for a similar ruling")
-      .get(s"$traderUiBaseUrl/provide-similar-ruling-reference")
+      .post(s"$traderUiBaseUrl/provide-similar-ruling-reference")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "FR12345678")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getAddAnotherSimilarRuling: HttpRequestBuilder = {
+  def postAddAnotherSimilarRuling: HttpRequestBuilder = {
     http("Do you want to add another similar ruling?")
-      .get(s"$traderUiBaseUrl/add-another-similar-ruling")
+      .post(s"$traderUiBaseUrl/add-another-similar-ruling")
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("value", "false")
+      .formParam("add-another-ruling-choice", "false")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getRegisterForEori: HttpRequestBuilder = {
+  def postRegisterForEori: HttpRequestBuilder = {
     http("Registered Address For Eori")
-      .get(s"$traderUiBaseUrl/provide-registered-eori-details")
+      .post(s"$traderUiBaseUrl/provide-registered-eori-details")
       .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("eori", s"$eoriNumber")
       .formParam("businessName", "Digital Tariffs Limited Company")
       .formParam("addressLine1", "Victoria Road 10")
       .formParam("townOrCity", "Shipley")
       .formParam("postcode", "LS10 6HT")
-      .formParam("country", "UK")
+      .formParam("country", "GB")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getEnterContactDetails: HttpRequestBuilder = {
+  def postEnterContactDetails: HttpRequestBuilder = {
     http("Provide the contact details")
-      .get(s"$traderUiBaseUrl/provide-contact-details")
+      .post(s"$traderUiBaseUrl/provide-contact-details")
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("name", "Joe Bloggs")
       .formParam("email", "joe.bloggs@example.sh")
       .formParam("phoneNumber", "0123456789")
       .check(status.is(200))
+      .check(saveCsrfToken)
   }
 
-  def getCheckYourAnswers: HttpRequestBuilder = {
+  def postCheckYourAnswers: HttpRequestBuilder = {
     http("Check Your Answers")
-      .get(s"$traderUiBaseUrl/check-your-answers")
+      .post(s"$traderUiBaseUrl/check-your-answers")
+      .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(200))
   }
 
