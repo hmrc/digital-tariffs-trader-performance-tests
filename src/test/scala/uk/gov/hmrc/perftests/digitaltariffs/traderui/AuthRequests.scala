@@ -10,14 +10,12 @@ object AuthRequests extends DigitalTariffsPerformanceTestRunner {
   def getGovGatewaySignIn: HttpRequestBuilder = {
     http("Government Gateway Sign In - GET")
       .get(s"$authStubBaseUrl/gg-sign-in")
-      .check(css("input[name='csrfToken']", "value").saveAs("csrfToken"))
       .check(status.is(200))
   }
 
   def postGovGatewaySignIn: HttpRequestBuilder = {
     http("Government Gateway Sign In - POST")
       .post(s"$authStubBaseUrl/gg-sign-in")
-      .formParam("csrfToken", "you-do-not-need-this-anymore")
       .formParam("authorityId", "")
       .formParam("redirectionUrl", traderUiBaseUrl)
       .formParam("credentialStrength", "weak")
