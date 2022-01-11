@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,12 @@ object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
   def getInformationMadePublic: HttpRequestBuilder = {
     http("Some of the information you provide")
       .get(s"$traderUiBaseUrl/information-may-be-made-public")
+      .check(status.is(200))
+  }
+
+  def getHowWeContactYou: HttpRequestBuilder = {
+    http("How we contact you about your application")
+      .get(s"$traderUiBaseUrl/how-we-contact-you-about-your-application")
       .check(status.is(200))
   }
 
