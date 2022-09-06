@@ -29,12 +29,11 @@ import scala.concurrent.duration._
 
 trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with ServicesConfiguration {
 
-  protected def buildHttpProtocol(url: String): HttpProtocolBuilder = {
+  protected def buildHttpProtocol(url: String): HttpProtocolBuilder =
     http
       .userAgentHeader("DigitalTariffs-PerformanceTests")
       .connectionHeader("close")
       .baseUrl(url)
-  }
 
   protected val externalBaseUrl = "https://www.staging.tax.service.gov.uk"
 
@@ -45,7 +44,7 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
 
   protected val waitTime: FiniteDuration = 1.seconds
 
-  protected val rate = 0.5D
+  protected val rate                         = 0.5d
   protected val rampInterval: FiniteDuration = 1.minute // 5.seconds
   protected val mainInterval: FiniteDuration = 8.minutes // 15.seconds
 
@@ -61,9 +60,8 @@ trait DigitalTariffsPerformanceTestRunner extends PerformanceTestRunner with Ser
       global.successfulRequests.percent.gte(99.0)
     )
 
-  def saveCsrfToken: CheckBuilder[RegexCheckType, String, String] = {
+  def saveCsrfToken: CheckBuilder[RegexCheckType, String, String] =
     regex(_ => csrfPattern).saveAs("csrfToken")
-  }
 
   private val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)"""
 

@@ -24,11 +24,10 @@ import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests._
 
 class TraderUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
 
-  override val httpProtocol: HttpProtocolBuilder = {
+  override val httpProtocol: HttpProtocolBuilder =
     buildHttpProtocol(url = externalBaseUrl)
-  }
 
-  setup("traderUI", "UK Trader applies for a BTI application") withRequests(
+  setup("traderUI", "UK Trader applies for a BTI application") withRequests (
     // Government Gateway Sign In
     getGovGatewaySignIn,
     postGovGatewaySignIn,
