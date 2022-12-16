@@ -16,18 +16,14 @@
 
 package uk.gov.hmrc.perftests.digitaltariffs.traderui
 
-import io.gatling.http.protocol.HttpProtocolBuilder
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
+import uk.gov.hmrc.perftests.digitaltariffs.Configuration
 import uk.gov.hmrc.perftests.digitaltariffs.traderui.AuthRequests._
 import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests._
 
-class TraderUiSimulation extends PerformanceTestRunner with DigitalTariffsPerformanceTestRunner {
+class TraderUiSimulation extends PerformanceTestRunner with Configuration {
 
-  override val httpProtocol: HttpProtocolBuilder =
-    buildHttpProtocol(url = externalBaseUrl)
-
-  setup("traderUI", "UK Trader applies for a BTI application") withRequests (
+  setup("traderUI", "UK Trader applies for a BTI application").withRequests(
     // Government Gateway Sign In
     getGovGatewaySignIn,
     postGovGatewaySignIn,
@@ -56,6 +52,7 @@ class TraderUiSimulation extends PerformanceTestRunner with DigitalTariffsPerfor
     postAddAnotherSimilarRuling,
     postRegisterForEori,
     postEnterContactDetails,
+    getCheckYourAnswers,
     postCheckYourAnswers,
     getConfirmation
   )
