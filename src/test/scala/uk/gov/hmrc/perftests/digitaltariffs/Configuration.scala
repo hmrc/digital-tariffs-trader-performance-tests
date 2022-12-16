@@ -20,7 +20,7 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait Configuration extends ServicesConfiguration {
 
-  protected val authStubBaseUrl: String = baseUrlFor("auth-login-stub") + "/auth-login-stub"
+  protected val authStubBaseUrl: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/gg-sign-in"
   protected val traderUiBaseUrl: String = baseUrlFor("binding-tariff-trader-frontend") + "/advance-tariff-application"
 
   protected val eoriNumber = "AA000111222"

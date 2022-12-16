@@ -26,12 +26,12 @@ object AuthRequests extends Configuration {
 
   def getGovGatewaySignIn: HttpRequestBuilder =
     http("Government Gateway Sign In - GET")
-      .get(s"$authStubBaseUrl/gg-sign-in")
+      .get(authStubBaseUrl)
       .check(status.is(HttpResponseStatus.OK.code()))
 
   def postGovGatewaySignIn: HttpRequestBuilder =
     http("Government Gateway Sign In - POST")
-      .post(s"$authStubBaseUrl/gg-sign-in")
+      .post(authStubBaseUrl)
       .formParam("authorityId", "")
       .formParam("redirectionUrl", traderUiBaseUrl)
       .formParam("credentialStrength", "weak")
@@ -43,5 +43,6 @@ object AuthRequests extends Configuration {
       .formParam("enrolment[0].taxIdentifier[0].name", "EORINumber")
       .formParam("enrolment[0].taxIdentifier[0].value", eoriNumber)
       .formParam("enrolment[0].state", "Activated")
-      .check(status.is(HttpResponseStatus.OK.code()))
+      .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
+      .check(header("Location").is(traderUiBaseUrl))
 }

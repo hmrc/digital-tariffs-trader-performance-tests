@@ -23,7 +23,7 @@ import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests._
 
 class TraderUiSimulation extends PerformanceTestRunner with Configuration {
 
-  setup("traderUI", "UK Trader applies for a BTI application") withRequests (
+  setup("traderUI", "UK Trader applies for a BTI application").withRequests(
     // Government Gateway Sign In
     getGovGatewaySignIn,
     postGovGatewaySignIn,
@@ -52,6 +52,7 @@ class TraderUiSimulation extends PerformanceTestRunner with Configuration {
     postAddAnotherSimilarRuling,
     postRegisterForEori,
     postEnterContactDetails,
+    getCheckYourAnswers,
     postCheckYourAnswers,
     getConfirmation
   )
