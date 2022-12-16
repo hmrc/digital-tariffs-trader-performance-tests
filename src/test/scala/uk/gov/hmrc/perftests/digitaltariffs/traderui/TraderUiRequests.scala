@@ -17,14 +17,21 @@
 package uk.gov.hmrc.perftests.digitaltariffs.traderui
 
 import io.gatling.core.Predef._
+import io.gatling.core.check.CheckBuilder
+import io.gatling.core.check.regex.RegexCheckType
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
-import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
+import uk.gov.hmrc.perftests.digitaltariffs.Configuration
 
-object TraderUiRequests extends DigitalTariffsPerformanceTestRunner {
+object TraderUiRequests extends Configuration {
 
   private val homePage = s"$traderUiBaseUrl/applications-and-rulings"
+
+  def saveCsrfToken: CheckBuilder[RegexCheckType, String, String] =
+    regex(_ => csrfPattern).saveAs("csrfToken")
+
+  private val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)"""
 
   def getStartPage: HttpRequestBuilder =
     http("Get start")

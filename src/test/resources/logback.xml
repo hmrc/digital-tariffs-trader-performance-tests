@@ -9,8 +9,9 @@
     </appender>
 
     <!--    <logger name="io.gatling.http" level="DEBUG" />-->
+    <!--    <logger name="io.gatling.http" level="TRACE" />-->
 
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
 

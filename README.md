@@ -4,19 +4,19 @@
 
 #### command for running all Gatling simulations 
 ##### command for running all Gatling simulations in Staging
+```shell
+./run.sh
 ```
-sbt gatling:test or 
-run the shell script for all tests by executing: ./run.sh
-
-To run smoke test run shell script for smoke tests by executing: ./run_smoke_test.sh or 
-sbt -Dperftest.runSmokeTest=true -DrunLocal=false gatling:test
-
+OR
+```shell
+./run_smoke_test.sh 
 ```
 
 ## Jenkins
 
 #### Jenkins job
 https://performance.tools.staging.tax.service.gov.uk/job/digital-tariffs-trader-performance-tests/
+---
 
 #### Jenkins configurations
 https://github.com/hmrc/performance-test-jobs/blob/master/jobs/live/digital_tariffs.groovy
@@ -24,7 +24,8 @@ https://github.com/hmrc/performance-test-jobs/blob/master/jobs/live/digital_tari
 
 #### Performance testing documentation 
 https://confluence.tools.tax.service.gov.uk/display/DTRG/Performance+Testing
-=======
+---
+
 # digital-tariffs-trader-performance-tests
 
 ### License
@@ -40,7 +41,7 @@ Clone this project:
 https://github.com/hmrc/service-manager-config/
 
 #### Mongo
-Run an instance of Mongo database. Version 3.6.1 is recommended.
+Run an instance of Mongo database. Version 4.2 is recommended.
 
 #### Localstack
 Please ensure you have Docker installed before continuing with these steps.
@@ -123,10 +124,10 @@ For all tests to run the `sm -s` command should result in something like the tab
 +----------------------------------+------+------+-------------+--------+-------+---------+-----------------+----------+-------------+
 ```
 ##### command for running all Gatling simulations in Localhost
+```shell
+./run_local.sh
 ```
-sbt -DrunLocal=true gatling:test or
-
-To run smoke test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true gatling:test
-
+OR
+```shell
+./run_smoke_test_local.sh
 ```

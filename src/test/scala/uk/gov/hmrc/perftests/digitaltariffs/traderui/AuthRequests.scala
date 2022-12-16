@@ -20,9 +20,9 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
-import uk.gov.hmrc.perftests.digitaltariffs.DigitalTariffsPerformanceTestRunner
+import uk.gov.hmrc.perftests.digitaltariffs.Configuration
 
-object AuthRequests extends DigitalTariffsPerformanceTestRunner {
+object AuthRequests extends Configuration {
 
   def getGovGatewaySignIn: HttpRequestBuilder =
     http("Government Gateway Sign In - GET")
