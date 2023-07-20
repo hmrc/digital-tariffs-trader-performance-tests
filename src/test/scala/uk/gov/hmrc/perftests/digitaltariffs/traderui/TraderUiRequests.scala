@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,27 +26,27 @@ import uk.gov.hmrc.perftests.digitaltariffs.Configuration
 
 object TraderUiRequests extends Configuration {
 
-  private val homePageUrl = "/advance-tariff-application/applications-and-rulings"
-  private val provideGoodsDescriptionUrl = "/advance-tariff-application/provide-goods-description"
-  private val addConfidentialInformationUrl = "/advance-tariff-application/add-confidential-information"
+  private val homePageUrl                       = "/advance-tariff-application/applications-and-rulings"
+  private val provideGoodsDescriptionUrl        = "/advance-tariff-application/provide-goods-description"
+  private val addConfidentialInformationUrl     = "/advance-tariff-application/add-confidential-information"
   private val provideConfidentialInformationUrl = "/advance-tariff-application/provide-confidential-information"
-  private val addSupportingDocumentUrl = "/advance-tariff-application/add-supporting-documents"
-  private val areYouSendingSamplesUrl = "/advance-tariff-application/are-you-sending-samples"
-  private val isSampleHazardousUrl = "/advance-tariff-application/is-sample-hazardous"
-  private val sampleReturnUrl = "/advance-tariff-application/would-you-like-the-samples-returned"
-  private val commodityCodeUrl = "/advance-tariff-application/have-you-found-commodity-code"
-  private val provideCommodityCodeUrl = "/advance-tariff-application/provide-commodity-code"
-  private val classifyingGoodsUrl = "/advance-tariff-application/any-legal-challenges-classifying-goods"
-  private val legalDetailsUrl = "/advance-tariff-application/provide-details-of-legal-challenges"
-  private val previousRulingUrl = "/advance-tariff-application/previous-ruling-reference"
-  private val providePreviousRulingUrl = "/advance-tariff-application/provide-previous-ruling-reference"
-  private val similarRulingUrl = "/advance-tariff-application/ruling-on-similar-goods"
-  private val provideSimilarRulingUrl = "/advance-tariff-application/provide-similar-ruling-reference"
-  private val addAnotherSimilarRulingUrl = "/advance-tariff-application/add-another-similar-ruling"
-  private val provideEoriUrl = "/advance-tariff-application/provide-registered-eori-details"
-  private val provideContactUrl = "/advance-tariff-application/provide-contact-details"
-  private val checkAnswersUrl = "/advance-tariff-application/check-your-answers"
-  private val applicationCompleteUrl = "/advance-tariff-application/application-complete"
+  private val addSupportingDocumentUrl          = "/advance-tariff-application/add-supporting-documents"
+  private val areYouSendingSamplesUrl           = "/advance-tariff-application/are-you-sending-samples"
+  private val isSampleHazardousUrl              = "/advance-tariff-application/is-sample-hazardous"
+  private val sampleReturnUrl                   = "/advance-tariff-application/would-you-like-the-samples-returned"
+  private val commodityCodeUrl                  = "/advance-tariff-application/have-you-found-commodity-code"
+  private val provideCommodityCodeUrl           = "/advance-tariff-application/provide-commodity-code"
+  private val classifyingGoodsUrl               = "/advance-tariff-application/any-legal-challenges-classifying-goods"
+  private val legalDetailsUrl                   = "/advance-tariff-application/provide-details-of-legal-challenges"
+  private val previousRulingUrl                 = "/advance-tariff-application/previous-ruling-reference"
+  private val providePreviousRulingUrl          = "/advance-tariff-application/provide-previous-ruling-reference"
+  private val similarRulingUrl                  = "/advance-tariff-application/ruling-on-similar-goods"
+  private val provideSimilarRulingUrl           = "/advance-tariff-application/provide-similar-ruling-reference"
+  private val addAnotherSimilarRulingUrl        = "/advance-tariff-application/add-another-similar-ruling"
+  private val provideEoriUrl                    = "/advance-tariff-application/provide-registered-eori-details"
+  private val provideContactUrl                 = "/advance-tariff-application/provide-contact-details"
+  private val checkAnswersUrl                   = "/advance-tariff-application/check-your-answers"
+  private val applicationCompleteUrl            = "/advance-tariff-application/application-complete"
 
   def saveCsrfToken: CheckBuilder[RegexCheckType, String, String] =
     regex(_ => csrfPattern).saveAs("csrfToken")
