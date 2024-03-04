@@ -41,7 +41,7 @@ Clone this project:
 https://github.com/hmrc/service-manager-config/
 
 #### Mongo
-Run an instance of Mongo database. Version 4.2 is recommended.
+Run an instance of Mongo database. Version 5.0 is recommended.
 
 #### Localstack
 Please ensure you have Docker installed before continuing with these steps.
