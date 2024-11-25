@@ -79,8 +79,6 @@ Then check this URL is available in the browser http://localhost:4572/digital-ta
 Run the following command:
 ```
 sm2 --start DIGITAL_TARIFFS
-sm2 --stop PDF_GENERATOR_SERVICE
-sm2 --start PDF_GENERATOR_SERVICE:1.20.0
 sm2 --start FEEDBACK_FRONTEND
 
 Stop any relevant services that you will be running locally through the console:
