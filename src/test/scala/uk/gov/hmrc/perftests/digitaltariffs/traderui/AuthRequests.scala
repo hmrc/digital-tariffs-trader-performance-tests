@@ -28,10 +28,12 @@ object AuthRequests extends Configuration {
     http("Government Gateway Sign In - GET")
       .get(authStubBaseUrl)
       .check(status.is(HttpResponseStatus.OK.code()))
+      .check(saveCsrfToken)
 
   def postGovGatewaySignIn: HttpRequestBuilder =
     http("Government Gateway Sign In - POST")
       .post(authStubBaseUrl)
+      .formParam("csrfToken", "${csrfToken}")
       .formParam("authorityId", "")
       .formParam("redirectionUrl", traderUiBaseUrl)
       .formParam("credentialStrength", "strong")
