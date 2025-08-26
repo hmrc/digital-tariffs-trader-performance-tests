@@ -21,6 +21,7 @@ import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
 import uk.gov.hmrc.perftests.digitaltariffs.Configuration
+import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests.saveCsrfToken
 
 object AuthRequests extends Configuration {
 

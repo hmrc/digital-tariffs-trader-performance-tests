@@ -16,9 +16,6 @@
 
 package uk.gov.hmrc.perftests.digitaltariffs
 
-import io.gatling.core.Predef._
-import io.gatling.core.check.CheckBuilder
-import io.gatling.core.check.regex.RegexCheckType
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait Configuration extends ServicesConfiguration {
@@ -27,10 +24,5 @@ trait Configuration extends ServicesConfiguration {
   protected val traderUiBaseUrl: String = baseUrlFor("binding-tariff-trader-frontend") + "/advance-tariff-application"
 
   protected val eoriNumber = "AA000111222"
-
-  def saveCsrfToken: CheckBuilder[RegexCheckType, String, String] =
-    regex(_ => csrfPattern).saveAs("csrfToken")
-
-  private val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)"""
 
 }
