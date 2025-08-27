@@ -21,6 +21,7 @@ import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
 import uk.gov.hmrc.perftests.digitaltariffs.Configuration
+import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests.saveCsrfToken
 
 object AuthRequests extends Configuration {
 
@@ -28,10 +29,12 @@ object AuthRequests extends Configuration {
     http("Government Gateway Sign In - GET")
       .get(authStubBaseUrl)
       .check(status.is(HttpResponseStatus.OK.code()))
+      .check(saveCsrfToken)
 
   def postGovGatewaySignIn: HttpRequestBuilder =
     http("Government Gateway Sign In - POST")
       .post(authStubBaseUrl)
+      .formParam("csrfToken", "${csrfToken}")
       .formParam("authorityId", "")
       .formParam("redirectionUrl", traderUiBaseUrl)
       .formParam("credentialStrength", "strong")
