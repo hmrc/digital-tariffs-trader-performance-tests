@@ -48,7 +48,7 @@ object TraderUiRequests extends Configuration {
   private val checkAnswersUrl                   = "/advance-tariff-application/check-your-answers"
   private val applicationCompleteUrl            = "/advance-tariff-application/application-complete"
 
-  def saveCsrfToken: CheckBuilder[RegexCheckType, String, String] =
+  def saveCsrfToken: CheckBuilder[RegexCheckType, String] =
     regex(_ => csrfPattern).saveAs("csrfToken")
 
   private val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)"""
@@ -83,7 +83,7 @@ object TraderUiRequests extends Configuration {
   def postGoodsName: HttpRequestBuilder =
     http("POST Provide a name for the goods")
       .post(s"$traderUiBaseUrl/provide-goods-name")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("goodsName", "Snow man jacket")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(provideGoodsDescriptionUrl))
@@ -91,7 +91,7 @@ object TraderUiRequests extends Configuration {
   def postGoodsDescription: HttpRequestBuilder =
     http("POST Provide a detailed description")
       .post(s"$traderUiBaseUrl/provide-goods-description")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("goodsDescription", "Snow man jacket in black colour")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(addConfidentialInformationUrl))
@@ -99,7 +99,7 @@ object TraderUiRequests extends Configuration {
   def postConfidentialInfo: HttpRequestBuilder =
     http("POST Do you want to add any confidential information")
       .post(s"$traderUiBaseUrl/add-confidential-information")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "true")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(provideConfidentialInformationUrl))
@@ -107,7 +107,7 @@ object TraderUiRequests extends Configuration {
   def postProvideConfidentialInfo: HttpRequestBuilder =
     http("POST Provide any confidential information")
       .post(s"$traderUiBaseUrl/provide-confidential-information")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("confidentialInformation", "I have used colour to pain your snow man")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(addSupportingDocumentUrl))
@@ -115,7 +115,7 @@ object TraderUiRequests extends Configuration {
   def postUploadSupportingDocument: HttpRequestBuilder =
     http("POST Do you want to upload any supporting documents?")
       .post(s"$traderUiBaseUrl/add-supporting-documents")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "false") // for simplicity we do not send files in Jenkins
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(areYouSendingSamplesUrl))
@@ -123,7 +123,7 @@ object TraderUiRequests extends Configuration {
   def postAreYouSendingASample: HttpRequestBuilder =
     http("POST Are you sending a sample")
       .post(s"$traderUiBaseUrl/are-you-sending-samples")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "true")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(isSampleHazardousUrl))
@@ -131,7 +131,7 @@ object TraderUiRequests extends Configuration {
   def postCouldSampleBeHazardous: HttpRequestBuilder =
     http("POST Could the sample be potentially hazardous?")
       .post(s"$traderUiBaseUrl/is-sample-hazardous")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("isSampleHazardous", "false")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(sampleReturnUrl))
@@ -139,7 +139,7 @@ object TraderUiRequests extends Configuration {
   def postReturnSample: HttpRequestBuilder =
     http("POST Return Samples")
       .post(s"$traderUiBaseUrl/would-you-like-the-samples-returned")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "false")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(commodityCodeUrl))
@@ -147,7 +147,7 @@ object TraderUiRequests extends Configuration {
   def postHaveYouFoundCommodityCode: HttpRequestBuilder =
     http("POST Have you found a commodity code")
       .post(s"$traderUiBaseUrl/have-you-found-commodity-code")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "true")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(provideCommodityCodeUrl))
@@ -155,7 +155,7 @@ object TraderUiRequests extends Configuration {
   def postCommodityCodeDigits: HttpRequestBuilder =
     http("POST Provide a commodity code")
       .post(s"$traderUiBaseUrl/provide-commodity-code")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "95065100")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(classifyingGoodsUrl))
@@ -163,7 +163,7 @@ object TraderUiRequests extends Configuration {
   def postLegalChallenge: HttpRequestBuilder =
     http("POST Have there been any legal challenges")
       .post(s"$traderUiBaseUrl/any-legal-challenges-classifying-goods")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "true")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(legalDetailsUrl))
@@ -171,7 +171,7 @@ object TraderUiRequests extends Configuration {
   def postLegalChallengeDetails: HttpRequestBuilder =
     http("POST Provide details of any legal challenges ")
       .post(s"$traderUiBaseUrl/provide-details-of-legal-challenges")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("legalChallengeDetails", "So many challenges")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(previousRulingUrl))
@@ -179,7 +179,7 @@ object TraderUiRequests extends Configuration {
   def postPreviousRulingReference: HttpRequestBuilder =
     http("POST Do you have a previous ruling reference")
       .post(s"$traderUiBaseUrl/previous-ruling-reference")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "true")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(providePreviousRulingUrl))
@@ -187,7 +187,7 @@ object TraderUiRequests extends Configuration {
   def postProvidePreviousRulingReference: HttpRequestBuilder =
     http("POST Provide the reference number")
       .post(s"$traderUiBaseUrl/provide-previous-ruling-reference")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("btiReference", "GB12345678")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(similarRulingUrl))
@@ -195,7 +195,7 @@ object TraderUiRequests extends Configuration {
   def postSimilarRuling: HttpRequestBuilder =
     http("POST Are there similar goods")
       .post(s"$traderUiBaseUrl/ruling-on-similar-goods")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "true")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(provideSimilarRulingUrl))
@@ -203,7 +203,7 @@ object TraderUiRequests extends Configuration {
   def postProvideSimilarRulingReference: HttpRequestBuilder =
     http("POST Provide the reference number for a similar ruling")
       .post(s"$traderUiBaseUrl/provide-similar-ruling-reference")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", "FR12345678")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(addAnotherSimilarRulingUrl))
@@ -211,7 +211,7 @@ object TraderUiRequests extends Configuration {
   def postAddAnotherSimilarRuling: HttpRequestBuilder =
     http("POST Do you want to add another similar ruling?")
       .post(s"$traderUiBaseUrl/add-another-similar-ruling")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("add-another-ruling-choice", "false")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(provideEoriUrl))
@@ -219,7 +219,7 @@ object TraderUiRequests extends Configuration {
   def postRegisterForEori: HttpRequestBuilder =
     http("POST Registered Address For Eori")
       .post(s"$traderUiBaseUrl/provide-registered-eori-details")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("eori", s"$eoriNumber")
       .formParam("businessName", "Digital Tariffs Limited Company")
       .formParam("addressLine1", "Victoria Road 10")
@@ -232,7 +232,7 @@ object TraderUiRequests extends Configuration {
   def postEnterContactDetails: HttpRequestBuilder =
     http("POST Provide the contact details")
       .post(s"$traderUiBaseUrl/provide-contact-details")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .formParam("name", "Joe Bloggs")
       .formParam("email", "joe.bloggs@example.sh")
       .formParam("phoneNumber", "0123456789")
@@ -242,13 +242,13 @@ object TraderUiRequests extends Configuration {
   def getCheckYourAnswers: HttpRequestBuilder =
     http("GET Check Your Answers")
       .get(s"$traderUiBaseUrl/check-your-answers")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(HttpResponseStatus.OK.code()))
 
   def postCheckYourAnswers: HttpRequestBuilder =
     http("POST Check Your Answers")
       .post(s"$traderUiBaseUrl/check-your-answers")
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
       .check(header("Location").is(applicationCompleteUrl))
 
