@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
 import uk.gov.hmrc.perftests.digitaltariffs.Configuration
 import uk.gov.hmrc.perftests.digitaltariffs.traderui.TraderUiRequests.saveCsrfToken
+import io.gatling.core.session.StaticValueExpression
 
 object AuthRequests extends Configuration {
 
@@ -34,16 +35,16 @@ object AuthRequests extends Configuration {
   def postGovGatewaySignIn: HttpRequestBuilder =
     http("Government Gateway Sign In - POST")
       .post(authStubBaseUrl)
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("authorityId", "")
-      .formParam("redirectionUrl", traderUiBaseUrl)
-      .formParam("credentialStrength", "strong")
-      .formParam("confidenceLevel", "50")
-      .formParam("affinityGroup", "Individual")
-      .formParam("enrolment[0].name", "HMRC-ATAR-ORG")
-      .formParam("enrolment[0].taxIdentifier[0].name", "EORINumber")
-      .formParam("enrolment[0].taxIdentifier[0].value", eoriNumber)
-      .formParam("enrolment[0].state", "Activated")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("authorityId", StaticValueExpression(""))
+      .formParam("redirectionUrl", StaticValueExpression(traderUiBaseUrl))
+      .formParam("credentialStrength", StaticValueExpression("strong"))
+      .formParam("confidenceLevel", StaticValueExpression("50"))
+      .formParam("affinityGroup", StaticValueExpression("Individual"))
+      .formParam("enrolment[0].name", StaticValueExpression("HMRC-ATAR-ORG"))
+      .formParam("enrolment[0].taxIdentifier[0].name", StaticValueExpression("EORINumber"))
+      .formParam("enrolment[0].taxIdentifier[0].value", StaticValueExpression(eoriNumber))
+      .formParam("enrolment[0].state", StaticValueExpression("Activated"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(traderUiBaseUrl))
+      .check(header(StaticValueExpression("Location")).is(traderUiBaseUrl))
 }

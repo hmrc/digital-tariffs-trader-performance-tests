@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
 import uk.gov.hmrc.perftests.digitaltariffs.Configuration
+import io.gatling.core.session.StaticValueExpression
 
 object TraderUiRequests extends Configuration {
 
@@ -57,7 +58,7 @@ object TraderUiRequests extends Configuration {
     http("GET Entrypoint")
       .get(traderUiBaseUrl)
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(homePageUrl))
+      .check(header(StaticValueExpression("Location")).is(homePageUrl))
 
   def getInformationYouNeed: HttpRequestBuilder =
     http("GET Information you need to apply for a ruling")
@@ -83,174 +84,174 @@ object TraderUiRequests extends Configuration {
   def postGoodsName: HttpRequestBuilder =
     http("POST Provide a name for the goods")
       .post(s"$traderUiBaseUrl/provide-goods-name")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("goodsName", "Snow man jacket")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("goodsName", StaticValueExpression("Snow man jacket"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(provideGoodsDescriptionUrl))
+      .check(header(StaticValueExpression("Location")).is(provideGoodsDescriptionUrl))
 
   def postGoodsDescription: HttpRequestBuilder =
     http("POST Provide a detailed description")
       .post(s"$traderUiBaseUrl/provide-goods-description")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("goodsDescription", "Snow man jacket in black colour")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("goodsDescription", StaticValueExpression("Snow man jacket in black colour"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(addConfidentialInformationUrl))
+      .check(header(StaticValueExpression("Location")).is(addConfidentialInformationUrl))
 
   def postConfidentialInfo: HttpRequestBuilder =
     http("POST Do you want to add any confidential information")
       .post(s"$traderUiBaseUrl/add-confidential-information")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "true")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("true"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(provideConfidentialInformationUrl))
+      .check(header(StaticValueExpression("Location")).is(provideConfidentialInformationUrl))
 
   def postProvideConfidentialInfo: HttpRequestBuilder =
     http("POST Provide any confidential information")
       .post(s"$traderUiBaseUrl/provide-confidential-information")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("confidentialInformation", "I have used colour to pain your snow man")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("confidentialInformation", StaticValueExpression("I have used colour to pain your snow man"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(addSupportingDocumentUrl))
+      .check(header(StaticValueExpression("Location")).is(addSupportingDocumentUrl))
 
   def postUploadSupportingDocument: HttpRequestBuilder =
     http("POST Do you want to upload any supporting documents?")
       .post(s"$traderUiBaseUrl/add-supporting-documents")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "false") // for simplicity we do not send files in Jenkins
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("false")) // for simplicity we do not send files in Jenkins
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(areYouSendingSamplesUrl))
+      .check(header(StaticValueExpression("Location")).is(areYouSendingSamplesUrl))
 
   def postAreYouSendingASample: HttpRequestBuilder =
     http("POST Are you sending a sample")
       .post(s"$traderUiBaseUrl/are-you-sending-samples")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "true")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("true"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(isSampleHazardousUrl))
+      .check(header(StaticValueExpression("Location")).is(isSampleHazardousUrl))
 
   def postCouldSampleBeHazardous: HttpRequestBuilder =
     http("POST Could the sample be potentially hazardous?")
       .post(s"$traderUiBaseUrl/is-sample-hazardous")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("isSampleHazardous", "false")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("isSampleHazardous", StaticValueExpression("false"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(sampleReturnUrl))
+      .check(header(StaticValueExpression("Location")).is(sampleReturnUrl))
 
   def postReturnSample: HttpRequestBuilder =
     http("POST Return Samples")
       .post(s"$traderUiBaseUrl/would-you-like-the-samples-returned")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "false")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("false"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(commodityCodeUrl))
+      .check(header(StaticValueExpression("Location")).is(commodityCodeUrl))
 
   def postHaveYouFoundCommodityCode: HttpRequestBuilder =
     http("POST Have you found a commodity code")
       .post(s"$traderUiBaseUrl/have-you-found-commodity-code")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "true")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("true"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(provideCommodityCodeUrl))
+      .check(header(StaticValueExpression("Location")).is(provideCommodityCodeUrl))
 
   def postCommodityCodeDigits: HttpRequestBuilder =
     http("POST Provide a commodity code")
       .post(s"$traderUiBaseUrl/provide-commodity-code")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "95065100")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("95065100"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(classifyingGoodsUrl))
+      .check(header(StaticValueExpression("Location")).is(classifyingGoodsUrl))
 
   def postLegalChallenge: HttpRequestBuilder =
     http("POST Have there been any legal challenges")
       .post(s"$traderUiBaseUrl/any-legal-challenges-classifying-goods")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "true")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("true"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(legalDetailsUrl))
+      .check(header(StaticValueExpression("Location")).is(legalDetailsUrl))
 
   def postLegalChallengeDetails: HttpRequestBuilder =
     http("POST Provide details of any legal challenges ")
       .post(s"$traderUiBaseUrl/provide-details-of-legal-challenges")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("legalChallengeDetails", "So many challenges")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("legalChallengeDetails", StaticValueExpression("So many challenges"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(previousRulingUrl))
+      .check(header(StaticValueExpression("Location")).is(previousRulingUrl))
 
   def postPreviousRulingReference: HttpRequestBuilder =
     http("POST Do you have a previous ruling reference")
       .post(s"$traderUiBaseUrl/previous-ruling-reference")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "true")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("true"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(providePreviousRulingUrl))
+      .check(header(StaticValueExpression("Location")).is(providePreviousRulingUrl))
 
   def postProvidePreviousRulingReference: HttpRequestBuilder =
     http("POST Provide the reference number")
       .post(s"$traderUiBaseUrl/provide-previous-ruling-reference")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("btiReference", "GB12345678")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("btiReference", StaticValueExpression("GB12345678"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(similarRulingUrl))
+      .check(header(StaticValueExpression("Location")).is(similarRulingUrl))
 
   def postSimilarRuling: HttpRequestBuilder =
     http("POST Are there similar goods")
       .post(s"$traderUiBaseUrl/ruling-on-similar-goods")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "true")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("true"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(provideSimilarRulingUrl))
+      .check(header(StaticValueExpression("Location")).is(provideSimilarRulingUrl))
 
   def postProvideSimilarRulingReference: HttpRequestBuilder =
     http("POST Provide the reference number for a similar ruling")
       .post(s"$traderUiBaseUrl/provide-similar-ruling-reference")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("value", "FR12345678")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("value", StaticValueExpression("FR12345678"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(addAnotherSimilarRulingUrl))
+      .check(header(StaticValueExpression("Location")).is(addAnotherSimilarRulingUrl))
 
   def postAddAnotherSimilarRuling: HttpRequestBuilder =
     http("POST Do you want to add another similar ruling?")
       .post(s"$traderUiBaseUrl/add-another-similar-ruling")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("add-another-ruling-choice", "false")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("add-another-ruling-choice", StaticValueExpression("false"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(provideEoriUrl))
+      .check(header(StaticValueExpression("Location")).is(provideEoriUrl))
 
   def postRegisterForEori: HttpRequestBuilder =
     http("POST Registered Address For Eori")
       .post(s"$traderUiBaseUrl/provide-registered-eori-details")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("eori", s"$eoriNumber")
-      .formParam("businessName", "Digital Tariffs Limited Company")
-      .formParam("addressLine1", "Victoria Road 10")
-      .formParam("townOrCity", "Shipley")
-      .formParam("postcode", "LS10 6HT")
-      .formParam("country", "GB")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("eori", StaticValueExpression(s"$eoriNumber"))
+      .formParam("businessName", StaticValueExpression("Digital Tariffs Limited Company"))
+      .formParam("addressLine1", StaticValueExpression("Victoria Road 10"))
+      .formParam("townOrCity", StaticValueExpression("Shipley"))
+      .formParam("postcode", StaticValueExpression("LS10 6HT"))
+      .formParam("country", StaticValueExpression("GB"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(provideContactUrl))
+      .check(header(StaticValueExpression("Location")).is(provideContactUrl))
 
   def postEnterContactDetails: HttpRequestBuilder =
     http("POST Provide the contact details")
       .post(s"$traderUiBaseUrl/provide-contact-details")
-      .formParam("csrfToken", "#{csrfToken}")
-      .formParam("name", "Joe Bloggs")
-      .formParam("email", "joe.bloggs@example.sh")
-      .formParam("phoneNumber", "0123456789")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
+      .formParam("name", StaticValueExpression("Joe Bloggs"))
+      .formParam("email", StaticValueExpression("joe.bloggs@example.sh"))
+      .formParam("phoneNumber", StaticValueExpression("0123456789"))
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(checkAnswersUrl))
+      .check(header(StaticValueExpression("Location")).is(checkAnswersUrl))
 
   def getCheckYourAnswers: HttpRequestBuilder =
     http("GET Check Your Answers")
       .get(s"$traderUiBaseUrl/check-your-answers")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
       .check(status.is(HttpResponseStatus.OK.code()))
 
   def postCheckYourAnswers: HttpRequestBuilder =
     http("POST Check Your Answers")
       .post(s"$traderUiBaseUrl/check-your-answers")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("csrfToken", session => session("csrfToken").as[String])
       .check(status.is(HttpResponseStatus.SEE_OTHER.code()))
-      .check(header("Location").is(applicationCompleteUrl))
+      .check(header(StaticValueExpression("Location")).is(applicationCompleteUrl))
 
   def getConfirmation: HttpRequestBuilder =
     http("GET Confirmation")
