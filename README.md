@@ -43,23 +43,12 @@ https://github.com/hmrc/service-manager-config/
 #### Mongo
 Run an instance of Mongo database. Version 5.0 is recommended.
 
-#### Localstack
+#### Moto (S3)
 Please ensure you have Docker installed before continuing with these steps.
 
-You might need to modify your `~/.bash_profile` file by adding `export PATH="/Users/<USR>/Library/Python/2.7/bin:$PATH"`
-(Run `source ~/.bash_profile` for reloading it without restarting your machine) (one time only)
+Start [Moto](https://github.com/getmoto/moto) (MotoServer) on port 4566:
 
-Install localstack:
-
-`pip install localstack --user --upgrade --ignore-installed six` (one time only)
-
-`pip install amazon_kclpy` (one time only)
-
-`localstack start` (one time only)
-
-Start localstack
-
-`SERVICES=s3 localstack start` (we need only the S3 service)
+`docker run -d --restart unless-stopped --name moto -p 4566:5000 motoserver/moto:5.1.18`
 
 Set up aws cli credentials by running `aws configure` (one time only)
 ```
@@ -71,9 +60,9 @@ Default output format [None]:
 
 Create the bucket
 
-`aws --endpoint-url=http://localhost:4572 s3 mb s3://digital-tariffs-local`
+`aws --endpoint-url=http://localhost:4566 s3 mb s3://digital-tariffs-local`
 
-Then check this URL is available in the browser http://localhost:4572/digital-tariffs-local
+Then check this URL is available in the browser http://localhost:4566/digital-tariffs-local
 
 #### Run required microservices
 Run the following command:
